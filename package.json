@@ -19,5 +19,9 @@
     "dex"
   ],
   "author": "Sean Francis",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-flow": "^6.23.0"
+  }
 }
