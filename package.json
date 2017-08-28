@@ -4,7 +4,7 @@
   "description": "high performance mob instance",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel index.js -d lib/"
   },
   "keywords": [
     "javascript",
