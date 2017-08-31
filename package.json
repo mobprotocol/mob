@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel index.js -d lib/",
     "flow": "flow",
-    "start-server": "babel-node ./server/index.js"
+    "start-server": "babel-node ./server/index.js --presets es2017"
   },
   "keywords": [
     "javascript",
@@ -24,6 +24,7 @@
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "flow-bin": "^0.53.1"
