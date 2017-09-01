@@ -1,7 +1,10 @@
 import express from 'express'
 import ws from 'ws'
+import stringy from 'stringy'
 import crypto from 'crypto'
 const sha256 = crypto.createHash('sha256');
+
+console.log('sha256', sha256)
 
 /*
   RESTFUL INTERFACE
@@ -25,7 +28,7 @@ wss.on('connection', async (socket, req) => {
 
 async function registerClient(socket) {
   try {
-    const hash = sha256(socket)
+    const hash = sha256.update(stringy.stringify(socket)).digest('hex')
     console.log('hash', hash)
     clients[hash] = socket
     socket.onmessage = (e) => {
