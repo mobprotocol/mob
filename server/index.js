@@ -19,13 +19,8 @@ const wss = new ws.Server({ port: 3345 })
 
 const clients = { }
 
-wss.on('connection', (socket, req) => {
-
-  socket.send("hello world!")
-  console.log('req', req)
-  socket.onmessage = (e) => {
-    console.log('message', e.data)
-  }
+wss.on('connection', async (socket, req) => {
+  const test = await registerClient(socket)
 })
 
 async function registerClient(socket) {
@@ -33,6 +28,9 @@ async function registerClient(socket) {
     const hash = sha256(socket)
     console.log('hash', hash)
     clients[hash] = socket
+    socket.onmessage = (e) => {
+      console.log(`Message from ${clients[hash]}`, e.data)
+    }
   } catch (err) {
     console.log('### error while registering client', err)
   }
