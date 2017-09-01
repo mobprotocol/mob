@@ -18,11 +18,8 @@ const wss = new ws.Server({ port: 3345 })
 const clients = {}
 
 wss.on('connection', (socket, req) => {
-  console.log('socket', socket)
-  console.log('req', req)
   socket.send("hello world!")
+  socket.onmessage = (e) => {
+    console.log('message', e.data)
+  }
 })
-
-wss.onmessage = (e) => {
-  console.log('message', e.data)
-}
