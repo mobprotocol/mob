@@ -20,4 +20,9 @@ const clients = {}
 wss.on('connection', (socket, req) => {
   console.log('socket', socket)
   console.log('req', req)
+  socket.send("hello world!")
 })
+
+wss.onmessage = (e) => {
+  console.log('message', e.data)
+}
