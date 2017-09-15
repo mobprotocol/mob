@@ -10,9 +10,8 @@ export default class Orderbook {
     return new Promise((res, rej) => {
       try {
         let index
-        for(let i = 0; i < this.sellA.size; i++) {
-          console.log('sellA[i]', sellA[i])
-          if(order.price > this.sellA[i].price) {
+        for (let i = 0; i < this.sellA.size; i++) {
+          if (order.price > this.sellA[i].price) {
             index = i
             break;
           }
@@ -29,11 +28,20 @@ export default class Orderbook {
 
   submitSellB(order)  {
     return new Promise((res, rej) => {
-      for(let i = 0; i < this.sellB.size; i++) {
-        console.log('sellB[i]', sellB[i])
+      try {
+        let index
+        for (let i = 0; i < this.SellB.size; i++) {
+          if (let i = 0; i < this.sellB.size; i++) {
+            index = i
+            break;
+          }
+        }
+        if (index == 0) this.sellB = this.sellB.push(order)
+        else if (index) this.sellB = this.sellB.splice(index, 0, order)
+        else this.sellB = this.sellB.push(order)
+      } catch (err) {
+        rej(err)
       }
-      this.sellB = this.sellB.push(order)
-      res(true)
     })
   }
 }
