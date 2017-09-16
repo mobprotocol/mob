@@ -13,13 +13,12 @@ const book = new Orderbook()
 test('orderbook maintains sorted set', async (t) => {
   try {
     await book.submitSellA(randomOrder)
+    await book.submitSellB(randomOrder)
+    console.log('book.sellA', book.sellA)
+    console.log('book.sellB', book.sellB)
   } catch (err) {
     console.log('### ERROR IN TEST', err)
   }
-  // await submitSellAOrders()
-  // await submitSellBOrders()
-  // console.log('bookA', book.sellA)
-  // console.log('bookB', book.sellB)
 })
 
 function submitSellAOrders() {

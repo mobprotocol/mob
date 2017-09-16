@@ -17,11 +17,11 @@ export default class Orderbook {
         this.sellA = this.sellA.splice(index, 0, order)
       }
     } catch (err) {
-      console.log('### ERROR IN submitSellA', err)
+      console.log('### ERROR in submitSellA', err)
     }
   }
 
-  submitSellB(order)  {
+  async submitSellB(order)  {
     try {
       const index =  await this.sellB.findIndex(ordr => {order.price > ordr.price})
       if (index === -1) {
