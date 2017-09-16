@@ -11,15 +11,19 @@ const randomOrder = {
 const book = new Orderbook()
 
 test('orderbook maintains sorted set', async (t) => {
-  await submitSellAOrders()
-  await submitSellBOrders()
-  console.log('bookA', book.sellA)
-  console.log('bookB', book.sellB)
+  try {
+    await book.submitSellA(randomOrder)
+  } catch (err) {
+    console.log('### ERROR IN TEST', err)
+  }
+  // await submitSellAOrders()
+  // await submitSellBOrders()
+  // console.log('bookA', book.sellA)
+  // console.log('bookB', book.sellB)
 })
 
 function submitSellAOrders() {
   return new Promise(async (res, rej) => {
-    if(orderABatch <= 0) res(true)
     console.log('randomOrder', randomOrder)
     await book.submitSellA(randomOrder)
     orderABatch--

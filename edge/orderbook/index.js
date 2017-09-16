@@ -6,46 +6,33 @@ export default class Orderbook {
     this.sellB = new List()
   }
 
-  submitSellA(order) {
-    return new Promise((res, rej) => {
-      try {
-        // let index
-        // for (let i = 0; i < this.sellA.size; i++) {
-        //   if (order.price > this.sellA[i].price) {
-        //     index = i
-        //     break;
-        //   }
-        // }
-        const index = this.sellA.findIndex((ordr) => {
-          return order.price > ordr.price
-        })
-        if (index == 0) this.sellA = this.sellA.push(order)
-        else if (index) this.sellA = this.sellA.splice(index, 0, order)
-        else this.sellA = this.sellA.push(order)
-        res(true)
-      } catch (err) {
-        rej(err)
+  async submitSellA(order) {
+    try {
+      const index =  await this.sellA.findIndex(ordr => {order.price > ordr.price})
+      if (index === -1) {
+        this.sellA = this.sellA.push(order)
+      } else if (index == 0) {
+        this.sellA = this.sellA.unshift(order)
+      } else {
+        this.sellA = this.sellA.splice(index, 0, order)
       }
-    })
+    } catch (err) {
+      console.log('### ERROR IN submitSellA', err)
+    }
   }
 
   submitSellB(order)  {
-    return new Promise((res, rej) => {
-      try {
-        let index
-        for (let i = 0; i < this.sellB.size; i++) {
-          console.log('this.sellB[i]', this.sellB[i])
-          if (order.price > this.sellB[i].price) {
-            index = i
-            break;
-          }
-        }
-        if (index == 0) this.sellB = this.sellB.push(order)
-        else if (index) this.sellB = this.sellB.splice(index, 0, order)
-        else this.sellB = this.sellB.push(order)
-      } catch (err) {
-        rej(err)
+    try {
+      const index =  await this.sellB.findIndex(ordr => {order.price > ordr.price})
+      if (index === -1) {
+        this.sellB = this.sellB.push(order)
+      } else if (index == 0) {
+        this.sellB = this.sellB.unshift(order)
+      } else {
+        this.sellB = this.sellB.splice(index, 0, order)
       }
-    })
+    } catch (err) {
+      console.log('### ERROR IN submitSellB', err)
+    }
   }
 }
