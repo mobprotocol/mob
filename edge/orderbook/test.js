@@ -10,12 +10,13 @@ const randomOrder = {
 }
 const book = new Orderbook()
 
-test('orderbook maintains sorted set', async (t) => {
+test('sellBaseCase', async (t) => {
   try {
+    t.plan(2)
     await book.submitSellA(randomOrder)
     await book.submitSellB(randomOrder)
-    console.log('book.sellA', book.sellA)
-    console.log('book.sellB', book.sellB)
+    t.assert(book.sellA.size > 0)
+    t.assert(book.sellB.size > 0)
   } catch (err) {
     console.log('### ERROR IN TEST', err)
   }
