@@ -9,13 +9,16 @@ export default class Orderbook {
   submitSellA(order) {
     return new Promise((res, rej) => {
       try {
-        let index
-        for (let i = 0; i < this.sellA.size; i++) {
-          if (order.price > this.sellA[i].price) {
-            index = i
-            break;
-          }
-        }
+        // let index
+        // for (let i = 0; i < this.sellA.size; i++) {
+        //   if (order.price > this.sellA[i].price) {
+        //     index = i
+        //     break;
+        //   }
+        // }
+        const index = this.sellA.findIndex((ordr) => {
+          return order.price > ordr.price
+        })
         if (index == 0) this.sellA = this.sellA.push(order)
         else if (index) this.sellA = this.sellA.splice(index, 0, order)
         else this.sellA = this.sellA.push(order)
@@ -30,8 +33,9 @@ export default class Orderbook {
     return new Promise((res, rej) => {
       try {
         let index
-        for (let i = 0; i < this.SellB.size; i++) {
-          if (let i = 0; i < this.sellB.size; i++) {
+        for (let i = 0; i < this.sellB.size; i++) {
+          console.log('this.sellB[i]', this.sellB[i])
+          if (order.price > this.sellB[i].price) {
             index = i
             break;
           }
