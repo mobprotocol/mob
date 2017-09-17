@@ -28,7 +28,6 @@ test('should submit 10 sells to ledger wile maintaining a sorted set', async (t)
     t.assert(book.sellB.size == 10)
     let tempA = 1e16 // arbitrary high number
     book.sellA.map(ordr => {
-      console.log('ordr', ordr.price.toString(), ordr.quantity.toString())
       t.assert(ordr.price < tempA)
       return tempA = ordr
     })

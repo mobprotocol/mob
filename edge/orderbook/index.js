@@ -7,9 +7,8 @@ export default class Orderbook {
   }
 
   async submitSellA(order) {
-    console.log('order', order.price.toNumber(), order.quantity.toNumber())
     try {
-      const index =  await this.sellA.findIndex(ordr => {order.price > ordr.price})
+      const index =  await this.sellA.findIndex(ordr => order.price > ordr.price)
       if (index === -1) {
         this.sellA = this.sellA.push(order)
       } else if (index == 0) {
