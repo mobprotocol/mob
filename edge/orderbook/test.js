@@ -21,7 +21,7 @@ test('should submit one sell to ledger', async (t) => {
 test('should submit 10 sells to ledger wile maintaining a sorted set', async (t) => {
   const book = new Orderbook()
   try {
-    t.plan(2)
+    t.plan(22)
     await submitSellAOrders(book)
     await submitSellBOrders(book)
     t.assert(book.sellA.size === 10)
@@ -30,6 +30,11 @@ test('should submit 10 sells to ledger wile maintaining a sorted set', async (t)
     book.sellA.map(ordr => {
       t.assert(ordr.price < tempA)
       return tempA = ordr
+    })
+    let tempB = 1e16 // arbitrary high number
+    book.sellB.map(ordr => {
+      t.assert(ordr.price < tempB)
+      return tempB = ordr
     })
   } catch (err) {
     console.log('### ERROR in sort test', err)

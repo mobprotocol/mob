@@ -23,7 +23,7 @@ export default class Orderbook {
 
   async submitSellB(order)  {
     try {
-      const index =  await this.sellB.findIndex(ordr => {order.price > ordr.price})
+      const index =  await this.sellB.findIndex(ordr => order.price > ordr.price)
       if (index === -1) {
         this.sellB = this.sellB.push(order)
       } else if (index == 0) {
