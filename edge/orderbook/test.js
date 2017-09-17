@@ -25,36 +25,24 @@ test('should submit one sell to ledger', async (t) => {
 test('should submit 10 sells to ledger wile maintaining a sorted set', async (t) => {
   const book = new Orderbook()
   try {
-    t.plan(1)
+    t.plan(2)
     await submitSellAOrders(book)
-    console.log('book.sellA.size', book.sellA.size)
     t.assert(book.sellA.size === 10)
+    await submitSellBOrders(book)
+    t.assert(book.sellB.size == 10)
   } catch (err) {
     console.log('### ERROR in sort test', err)
   }
 })
 
-// function submitSellAOrders() {
-//   return new Promise(async (res, rej) => {
-//     console.log('randomOrder', randomOrder)
-//     await book.submitSellA(randomOrder)
-//     orderABatch--
-//     return submitSellAOrders()
-//   })
-// }
-
 async function submitSellAOrders(book) {
   await book.submitSellA(randomOrder)
-  console.log('orderABatch', orderABatch)
   orderABatch--
   if (orderABatch > 0) await submitSellAOrders(book)
 }
 
-function submitSellBOrders(book) {
-  return new Promise(async (res, rej) => {
-    if(orderBBatch <= 0) res(true)
-    await book.submitSellB(randomOrder)
-    orderBBatch--
-    return submitSellBOrders(book)
-  })
+async function submitSellBOrders(book) {
+  await book.submitSellB(randomOrder)
+  orderBBatch--
+  if (orderBBatch > 0) await submitSellBOrders(book)
 }
