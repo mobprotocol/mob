@@ -4,10 +4,6 @@ import Orderbook from './index'
 
 let orderABatch = 10
 let orderBBatch = 10
-const randomOrder = {
-  price: new BN(Math.floor(Math.random(101) + 1)),
-  quantity: new BN(Math.floor(Math.random(101) + 1))
-}
 
 test('should submit one sell to ledger', async (t) => {
   const book = new Orderbook()
@@ -27,9 +23,15 @@ test('should submit 10 sells to ledger wile maintaining a sorted set', async (t)
   try {
     t.plan(2)
     await submitSellAOrders(book)
-    t.assert(book.sellA.size === 10)
     await submitSellBOrders(book)
+    t.assert(book.sellA.size === 10)
     t.assert(book.sellB.size == 10)
+    let tempA = 1e16 // arbitrary high number
+    book.sellA.map(ordr => {
+      console.log('ordr', ordr.price.toString(), ordr.quantity.toString())
+      t.assert(ordr.price < tempA)
+      return tempA = ordr
+    })
   } catch (err) {
     console.log('### ERROR in sort test', err)
   }
@@ -45,4 +47,11 @@ async function submitSellBOrders(book) {
   await book.submitSellB(randomOrder)
   orderBBatch--
   if (orderBBatch > 0) await submitSellBOrders(book)
+}
+
+function randomOrder() {
+  return {
+    price: new BN(Math.floor(Math.random() * 100 + 1)),
+    quantity: new BN(Math.floor(Math.random() * 100 + 1))
+  }
 }
