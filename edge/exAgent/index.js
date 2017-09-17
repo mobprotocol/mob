@@ -7,16 +7,28 @@ export default class ExAgent {
 
   async daemon() {
     await delay(3000)
-    console.log('hearbeat')
     await this.match()
     await this.daemon()
   }
 
   async match() {
     try {
-      console.log('match it up !')
+      const side = chooseSide()
     } catch (err) {
       console.log('### ERROR in match', err)
     }
+  }
+
+  chooseSide() {
+    const bnry = Math.round(Math.random)
+    bnry === 0 ? return 'A' : return 'B'
+  }
+
+  getOrder() {
+
+  }
+
+  fillOrder() {
+
   }
 }
