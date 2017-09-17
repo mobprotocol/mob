@@ -1,8 +1,8 @@
 import delay from 'await-delay'
 
 export default class ExAgent {
-  constructor() {
-
+  constructor(params) {
+    this.orderbook = params.orderbook
   }
 
   async daemon() {
