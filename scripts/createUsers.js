@@ -3,6 +3,7 @@ import {
   privateToAddress,
   privateToPublic,
 } from 'ethereumjs-util'
+import fs from 'fs'
 
 const params = { keyBytes: 32, ivBytes: 16 };
 let size = 100
@@ -40,4 +41,17 @@ async function users() {
   return swarm
 }
 
-export default users
+async function writeFile(usrs) {
+  return new Promise((res, rej) => {
+    fs.writeFile('../conf/users.json', JSON.stringify(usrs), 'utf8', err => {
+      if (err) rej('### ERROR in users file write', err)
+      console.log('### successfull file write ./conf/users.json')
+      res(true)
+    })
+  })
+}
+
+users()
+.then(usrs => writeFile(usrs))
+.then(res => true)
+.catch('### ERROR in file write')
