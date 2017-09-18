@@ -19,6 +19,7 @@ export default class ExAgent {
     try {
       const sides = this.chooseSide()
       const order = this.book[`sell${sides[0]}`].last()
+      console.log('order 1', order)
       await this.fillOrder(sides, order)
     } catch (err) {
       console.log('### ERROR in match', err)
@@ -26,7 +27,8 @@ export default class ExAgent {
   }
 
   chooseSide() {
-    const bnry = Math.round(Math.random)
+    const bnry = Math.round(Math.random())
+    console.log('bnry', bnry)
     if (bnry === 0) return ['A', 'B']
     else return ['B', 'A']
   }
@@ -34,7 +36,6 @@ export default class ExAgent {
   fillOrder(sides, order) {
     try {
       const inverseOrder = this.book[`sell${sides[1]}`].last()
-      const settlements = this.
       console.log('inverseOrder', inverseOrder)
     } catch (err) {
       console.log('### ERROR in fillOrder', err)
