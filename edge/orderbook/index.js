@@ -36,3 +36,12 @@ export default class Orderbook {
     }
   }
 }
+
+
+
+/*
+  ORDER DEFINITION
+
+  address: from,
+  price: BN,
+  quantity: BN, // the amount

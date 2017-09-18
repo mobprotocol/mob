@@ -34,6 +34,7 @@ export default class ExAgent {
   fillOrder(sides, order) {
     try {
       const inverseOrder = this.book[`sell${sides[1]}`].last()
+      const settlements = this.
       console.log('inverseOrder', inverseOrder)
     } catch (err) {
       console.log('### ERROR in fillOrder', err)

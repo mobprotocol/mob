@@ -41,19 +41,19 @@ test('should submit 10 sells to ledger wile maintaining a sorted set', async (t)
   }
 })
 
-async function submitSellAOrders(book) {
+export async function submitSellAOrders(book) {
   await book.submitSellA(randomOrder())
   orderABatch--
   if (orderABatch > 0) await submitSellAOrders(book)
 }
 
-async function submitSellBOrders(book) {
+export async function submitSellBOrders(book) {
   await book.submitSellB(randomOrder())
   orderBBatch--
   if (orderBBatch > 0) await submitSellBOrders(book)
 }
 
-function randomOrder() {
+export function randomOrder() {
   return {
     price: new BN(Math.floor(Math.random() * 100 + 1)),
     quantity: new BN(Math.floor(Math.random() * 100 + 1))
