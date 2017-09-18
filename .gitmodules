@@ -1,0 +1,3 @@
+[submodule "eths6"]
+	path = eths6
+	url = https://github.com/SeanAvery/eths6.git
