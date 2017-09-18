@@ -1,6 +1,12 @@
 import test from 'tape'
 import BN from 'bn.js'
 import Orderbook from './index'
+import crypto from 'crypto'
+import { sign } from 'ethjs-signer'
+import provider from 'ethjs-provider-http'
+import Eth from 'ethjs-query'
+
+const eth = new Eth(new provider('http://localhost:8545'))
 
 let orderABatch = 10
 let orderBBatch = 10
@@ -41,7 +47,13 @@ test('should submit 10 sells to ledger wile maintaining a sorted set', async (t)
   }
 })
 
+export async function generateSalt() {
+  return '0x' + crypto.randomBytes(16)
+}
+
 export async function submitSellAOrders(book) {
+  const signature = await sign(randomOrder(), privat)
+  console.log('signature', signature)
   await book.submitSellA(randomOrder())
   orderABatch--
   if (orderABatch > 0) await submitSellAOrders(book)
