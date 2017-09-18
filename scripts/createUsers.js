@@ -16,7 +16,8 @@ async function createUser() {
     return ({
       privKey,
       pubKey,
-      pubAddress
+      pubAddress,
+      balance: '0x28DF9A72FDE228000'
     })
   } catch (err) {
     console.log('### ERROR in createUser', err)
@@ -34,9 +35,9 @@ async function createSwarm() {
   }
 }
 
-const test = async () => {
+async function users() {
   await createSwarm()
-  console.log('swarm', swarm)
+  return swarm
 }
 
-new test()
+export default users
