@@ -13,11 +13,6 @@ getUsersData().then(usrs => {
   const server = rpc.server({'accounts': usrs })
   server.listen('8545', (err, chain) => {
     if (err) console.log('### ERROR in testrpc server', err)
-    console.log('chain', chain)
-  })
-
-  fs.writeFile('./conf/users.json', JSON.stringify(users), 'utf-8', err => {
-    if (err) console.log('### ERROR in users file write', err)
-    console.log('### Saved users to ./conf/users.json')
+    console.log('### ETHEREUM RPC LISTENING ON 8545')
   })
 })
