@@ -1,18 +1,8 @@
-import express from 'express'
 import ws from 'ws'
 import stringy from 'stringy'
 import crypto from 'crypto'
 import delay from 'await-delay'
 const sha256 = crypto.createHash('sha256');
-
-/*
-  RESTFUL INTERFACE
-*/
-const app = express()
-
-app.listen(3344, () => {
-  console.log('### HTTP INTERFACE LISTENING ON PORT 3344')
-})
 
 /*
   WEBSOCKET INTERFACE
@@ -50,12 +40,3 @@ function broadcast(msg) {
     console.log('### error in broadcast', err)
   })
 }
-
-// async function cron() {
-//   await delay(3000)
-//   console.log('here')
-//   await broadcast("broadcast from server")
-//   cron()
-// }
-//
-// cron()
