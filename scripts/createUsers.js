@@ -5,16 +5,38 @@ import {
 } from 'ethereumjs-util'
 
 const params = { keyBytes: 32, ivBytes: 16 };
+let size = 100
+let swarm = []
 
 async function createUser() {
   try {
     const privKey = await keys.create(params).privateKey.toString('hex').replace(/^/,'0x')
     const pubKey = await privateToPublic(privKey).toString('hex').replace(/^/, '0x')
-    console.log('pubKey', pubKey)
     const pubAddress = await privateToAddress(privKey).toString('hex').replace(/^/, '0x')
+    return ({
+      privKey,
+      pubKey,
+      pubAddress
+    })
   } catch (err) {
     console.log('### ERROR in createUser', err)
   }
 }
 
-createUser()
+async function createSwarm() {
+  try {
+    swarm.push(await createUser())
+    size--
+    if (size > 0) await createSwarm()
+    return true
+  } catch (err) {
+    console.log('### ERROR in createSwarm', error)
+  }
+}
+
+const test = async () => {
+  await createSwarm()
+  console.log('swarm', swarm)
+}
+
+new test()
