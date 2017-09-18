@@ -35,13 +35,17 @@ export default class Orderbook {
       console.log('### ERROR IN submitSellB', err)
     }
   }
+
+  /*
+    1. verify signature
+    2. check lcf
+  */
+
+  async filterOrder(order) {
+    try {
+      await verifySignature(order)
+    } catch (err) {
+      console.log('### ERROR in fillOrder', err)
+    }
+  }
 }
-
-
-
-/*
-  ORDER DEFINITION
-
-  address: from,
-  price: BN,
-  quantity: BN, // the amount
