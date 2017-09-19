@@ -40,7 +40,6 @@ export default class Orderbook {
     1. verify signature
     2. check lcf
   */
-
   async filterOrder(order) {
     try {
       await verifySignature(order)
@@ -48,4 +47,17 @@ export default class Orderbook {
       console.log('### ERROR in fillOrder', err)
     }
   }
+
+  verifySignature() {
+    try {
+
+    } catch (err) {
+
+    }
+  }
 }
+
+
+/*
+
+*/

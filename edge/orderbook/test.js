@@ -7,9 +7,10 @@ import provider from 'ethjs-provider-http'
 import Eth from 'ethjs-query'
 
 const eth = new Eth(new provider('http://localhost:8545'))
-
 let orderABatch = 10
 let orderBBatch = 10
+const tokenA = ''
+const tokenB = ''
 
 test('should submit one sell to ledger', async (t) => {
   const book = new Orderbook()
@@ -52,8 +53,7 @@ export async function generateSalt() {
 }
 
 export async function submitSellAOrders(book) {
-  const signature = await sign(randomOrder(), privat)
-  console.log('signature', signature)
+
   await book.submitSellA(randomOrder())
   orderABatch--
   if (orderABatch > 0) await submitSellAOrders(book)
@@ -65,9 +65,13 @@ export async function submitSellBOrders(book) {
   if (orderBBatch > 0) await submitSellBOrders(book)
 }
 
-export function randomOrder() {
-  return {
+export function randomOrder(from, ) {
+  if (!from) throw new Error('### specify a from public address')
+  return ({
+    from,
+    buy: ,
+    sell: ,
     price: new BN(Math.floor(Math.random() * 100 + 1)),
     quantity: new BN(Math.floor(Math.random() * 100 + 1))
-  }
+  })
 }
