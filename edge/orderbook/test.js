@@ -52,6 +52,7 @@ test('Should verify hash given a consistent order', async (t) => {
   const book = new Orderbook()
   const accounts = await eth.accounts()
   const order = await randomOrder(accounts[0])
+  console.log('order', order)
 })
 
 export async function generateSalt() {
@@ -71,13 +72,13 @@ export async function submitSellBOrders(book) {
   if (orderBBatch > 0) await submitSellBOrders(book)
 }
 
-// export function randomOrder(from) {
-//   if (!from) throw new Error('### specify a from public address')
-//   return ({
-//     from,
-//     price: new BN(Math.floor(Math.random() * 100 + 1)),
-//     quantity: new BN(Math.floor(Math.random() * 100 + 1))
-//     buy ,
-//     sell ,
-//   })
-// }
+export function randomOrder(from) {
+  if (!from) throw new Error('### specify a from public address')
+  return ({
+    from,
+    price: new BN(Math.floor(Math.random() * 100 + 1)),
+    quantity: new BN(Math.floor(Math.random() * 100 + 1)),
+    buy: tokenA,
+    sell : tokenB,
+  })
+}
