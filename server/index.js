@@ -12,7 +12,7 @@ const wss = new ws.Server({ port: 3345 })
 const clients = {}
 
 wss.on('connection', async (socket, req) => {
-  const test = await registerClient(socket)
+  await registerClient(socket)
 })
 
 export function registerClient(socket) {
@@ -20,7 +20,7 @@ export function registerClient(socket) {
     const hash = sha256.update(stringy.stringify(socket)).digest('hex')
     clients[hash] = stringy.stringify(socket)
     socket.onmessage = (e) => {
-      console.log(`Message from ${clients[hash]}`, e.data)
+      console.log(`Message from ${hash}`, e.data)
     }
   } catch (err) {
     console.log('### error while registering client', err)
