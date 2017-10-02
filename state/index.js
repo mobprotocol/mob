@@ -4,7 +4,7 @@ import ObservableStore from 'obs-store'
 import { broadcast } from '../server/index'
 import delay from 'async-delay'
 
-export class State {
+class State {
   constructor() {
     this.tokenTree = {}
     this.edgeTree  = {}
@@ -22,26 +22,10 @@ export class State {
       console.log('tree', tree)
       const hash = require('crypto').createHash('sha256').update(JSON.stringify(tree)).digest('hex')
       this.disk.put(`${Date.now()}_${hash}`, JSON.stringify(tree))
-      await broadcast(JSON.stringify(tree))
     } catch (err) {
       console.log('### Error in mutation', err)
     }
   }
 }
 
-const state = new State()
-
-async function test() {
-  try {
-    state.store.putState({
-      [Date.now()]: Math.random() * 100
-    })
-    console.log('here')
-    await delay(3000)
-    await test()
-  } catch (err) {
-    console.log('### error test loop', err)
-  }
-}
-
-test()
+export const state = new State()
