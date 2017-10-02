@@ -1,3 +1,6 @@
 [submodule "eths6"]
 	path = eths6
 	url = https://github.com/SeanAvery/eths6.git
+[submodule "alice"]
+	path = alice
+	url = https://github.com/SeanAvery/alice
