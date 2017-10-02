@@ -1,8 +1,5 @@
 import keys from 'keythereum'
-import {
-  privateToAddress,
-  privateToPublic,
-} from 'ethereumjs-util'
+import { privateToAddress, privateToPublic } from 'ethereumjs-util'
 import fs from 'fs'
 
 const params = { keyBytes: 32, ivBytes: 16 };
