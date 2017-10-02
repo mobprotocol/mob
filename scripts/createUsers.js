@@ -43,7 +43,7 @@ async function users() {
 
 async function writeFile(usrs) {
   return new Promise((res, rej) => {
-    fs.writeFile('../conf/users.json', JSON.stringify(usrs), 'utf8', err => {
+    fs.writeFile('./conf/users.json', JSON.stringify(usrs), 'utf8', err => {
       if (err) rej('### ERROR in users file write', err)
       console.log('### successfull file write ./conf/users.json')
       res(true)

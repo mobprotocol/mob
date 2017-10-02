@@ -6,7 +6,10 @@
   "scripts": {
     "build": "babel index.js -d lib/",
     "flow": "flow",
-    "start-server": "babel-node ./server/index.js"
+    "create-users": "babel-node ./scripts/createUsers.js",
+    "start-rpc": "babel-node ./scripts/startRPC.js",
+    "start-server": "babel-node ./server/index.js",
+    "create-tokens": "babel-node ./scripts/createToken.js"
   },
   "keywords": [
     "javascript",
