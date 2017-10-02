@@ -19,7 +19,8 @@ export class State {
 
   async mutate(tree) {
     try {
-      console.log('mutation event')
+      const hash = require('crypto').createHash('sha256').update(JSON.stringify(tree)).digest('hex')
+      console.log('hash', hash)
       await broadcast(JSON.stringify(tree))
     } catch (err) {
       console.log('### Error in mutation', err)
