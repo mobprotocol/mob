@@ -9,7 +9,7 @@
     "create-users": "babel-node ./scripts/createUsers.js",
     "start-rpc": "babel-node ./scripts/startRPC.js",
     "start-server": "babel-node ./server/index.js",
-    "create-tokens": "babel-node ./scripts/createToken.js"
+    "create-tokens": "babel-node ./scripts/createTokens.js"
   },
   "keywords": [
     "javascript",
@@ -24,7 +24,7 @@
     "dex"
   ],
   "author": "Sean Francis",
-  "license": "ISC",
+  "license": "NONE",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
@@ -34,6 +34,7 @@
     "tape": "^4.8.0"
   },
   "dependencies": {
+    "async-delay": "^1.0.3",
     "await-delay": "^1.0.0",
     "bn.js": "^4.11.8",
     "ethereumjs-abi": "^0.6.4",
@@ -47,7 +48,9 @@
     "keythereum": "^1.0.2",
     "level": "^1.7.0",
     "level-sublevel": "^6.6.1",
+    "leveldown": "^1.9.0",
     "levelup": "^1.3.9",
+    "obs-store": "^2.4.1",
     "solidity-sha3": "^0.4.1",
     "stringy": "^0.1.0",
     "sublevel": "^2.4.0",
