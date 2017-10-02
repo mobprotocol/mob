@@ -19,9 +19,10 @@ export class State {
 
   async mutate(tree) {
     try {
+      console.log('mutation event')
       await broadcast(tree)
     } catch (err) {
-      console.log('### Error in mutation')
+      console.log('### Error in mutation', err)
     }
   }
 }

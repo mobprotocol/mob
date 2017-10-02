@@ -15,7 +15,7 @@ wss.on('connection', async (socket, req) => {
   const test = await registerClient(socket)
 })
 
-function registerClient(socket) {
+export function registerClient(socket) {
   try {
     const hash = sha256.update(stringy.stringify(socket)).digest('hex')
     clients[hash] = stringy.stringify(socket)
@@ -27,7 +27,7 @@ function registerClient(socket) {
   }
 }
 
-function broadcast(msg) {
+export async function broadcast(msg) {
   if(Object.keys(clients).length === 0) {
     return true;
   }
