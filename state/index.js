@@ -19,8 +19,9 @@ export class State {
 
   async mutate(tree) {
     try {
+      console.log('tree', tree)
       const hash = require('crypto').createHash('sha256').update(JSON.stringify(tree)).digest('hex')
-      console.log('hash', hash)
+      this.disk.put(`${Date.now()}_${hash}`, JSON.stringify(tree))
       await broadcast(JSON.stringify(tree))
     } catch (err) {
       console.log('### Error in mutation', err)
@@ -35,6 +36,7 @@ async function test() {
     state.store.putState({
       [Date.now()]: Math.random() * 100
     })
+    console.log('here')
     await delay(3000)
     await test()
   } catch (err) {
