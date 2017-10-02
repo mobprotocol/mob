@@ -18,7 +18,7 @@ wss.on('connection', async (socket, req) => {
 export function registerClient(socket) {
   try {
     const hash = sha256.update(stringy.stringify(socket)).digest('hex')
-    clients[hash] = stringy.stringify(socket)
+    clients[hash] = socket
     socket.onmessage = (e) => {
       console.log(`Message from ${hash}`, e.data)
     }
@@ -33,7 +33,7 @@ export async function broadcast(msg) {
   }
   Promise.all(
     Object.keys(clients).map(client => {
-      console.log('client', clients[client])
+      console.log('client', clients[client], typeof clients[client] )
       clients[client].send(msg)
     })
   ).catch(err => {
