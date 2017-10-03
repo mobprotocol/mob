@@ -9,7 +9,6 @@ export default class ExAgent {
   async daemon(loops) {
     try {
       if (loops <= 0) return true
-      console.log('loops', loops)
       await delay(3000)
       await this.match()
       loops--
@@ -31,7 +30,6 @@ export default class ExAgent {
 
   chooseSide() {
     const bnry = Math.round(Math.random())
-    console.log('bnry', bnry)
     if (bnry === 0) return ['A', 'B']
     else return ['B', 'A']
   }
@@ -44,7 +42,8 @@ export default class ExAgent {
         console.log('### order out of market')
         return true
       }
-      // await this.generateSettlementEvent(order, inverseOrder)
+      const relative = this.relativeSize(order, inverseOrder)
+      console.log('relative', relative)
     } catch (err) {
       console.log('### ERROR in fillOrder', err)
     }
@@ -63,14 +62,12 @@ export default class ExAgent {
   //   }
   // }
 
-  async relativeSize(order1, order2){
+  relativeSize(order1, order2){
     try {
-      console.log('order1', order1)
-      console.log('order2', order2)
-      const order1Size = order1.quantity * order1.price
-      const order2Size = order2.quantity * order2.price
-      console.log('order1Sise', order1Size)
-      console.log('order2Size', order2Size)
+      const diff = order1.quantity - order2.quantity * order2.price
+      if (diff < 0) return 0
+      else if (diff > 0) return 1
+      else return 2
     } catch (err) {
       console.log('### error in releativeSize', err)
     }
