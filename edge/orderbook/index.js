@@ -8,6 +8,11 @@ export default class Orderbook {
 
   async submitSellA(order) {
     try {
+      if (!this.LCF(order)) {
+        console.log('### LCF does not exist')
+        console.log('order', order)
+        return true
+      }
       const index =  await this.sellA.findIndex(ordr => order.price > ordr.price)
       if (index === -1) {
         this.sellA = this.sellA.push(order)
@@ -23,6 +28,11 @@ export default class Orderbook {
 
   async submitSellB(order)  {
     try {
+      if (!this.LCF(order)) {
+        console.log('### LCF does not exist')
+        console.log('order', order)
+        return true
+      }
       const index =  await this.sellB.findIndex(ordr => order.price > ordr.price)
       if (index === -1) {
         this.sellB = this.sellB.push(order)
@@ -32,29 +42,19 @@ export default class Orderbook {
         this.sellB = this.sellB.splice(index, 0, order)
       }
     } catch (err) {
-      console.log('### ERROR IN submitSellB', err)
+      console.log('### ERROR in submitSellB', err)
     }
   }
 
+  LCF(order) {
+    if (order.price * order.quantity < 1) return false
+    else return true
+  }
   /*
     1. verify signature
     2. check lcf
+    [3. check approval]
   */
-  async filterOrder(order) {
-    try {
-      await verifySignature(order)
-    } catch (err) {
-      console.log('### ERROR in fillOrder', err)
-    }
-  }
-
-  verifySignature() {
-    try {
-
-    } catch (err) {
-
-    }
-  }
 }
 
 
